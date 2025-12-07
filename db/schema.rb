@@ -10,9 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_12_07_004927) do
+ActiveRecord::Schema[8.1].define(version: 2025_12_07_043015) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "internet_speeds", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.decimal "download_speed", precision: 15, scale: 2, null: false
+    t.string "download_unit", null: false
+    t.uuid "place_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["place_id"], name: "index_internet_speeds_on_place_id"
+  end
 
   create_table "places", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "address", null: false
@@ -21,4 +30,6 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_07_004927) do
     t.string "name", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_foreign_key "internet_speeds", "places"
 end
