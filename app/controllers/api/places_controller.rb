@@ -1,19 +1,28 @@
 module Api
-    class PlacesController < ApplicationController
+    class PlacesController < BaseController
         def index
-            place = Place.all.map do |place|
-                {
-                    name: place.name,
-                    city: place.city,
-                    most_recent_download_speed: most_recent_download_speed(place),
-                    most_recent_download_unit: most_recent_download_unit(place),
-                    number_of_measurements: number_of_measurements(place)
+            matching_places = get_matching_places(params["search_term"])
 
+            order_config = Queries::PlacesOrderer::OrderConfig.new(
+                sort_column: params["sort_column"],
+                sort_order: params["sort_order"]
+            )
+
+            ordered_places = Queries::PlacesOrderer.new.call(matching_places, order_config)
+
+            places_to_return = ordered_places.map do |place|
+                {
+                name: place.name,
+                city: place.city,
+                most_recent_download_speed: most_recent_download_speed(place),
+                most_recent_download_units: most_recent_download_unit(place),
+                number_of_measurements: number_of_measurements(place)
                 }
             end
 
-            render(json: { places: place })
+            render(json: { places: places_to_return} )
         end
+
 
         def most_recent_download_speed(place)
             place.internet_speeds.order("created_at").last&.download_speed

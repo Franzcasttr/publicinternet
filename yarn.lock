@@ -194,6 +194,7 @@ __metadata:
     esbuild: "npm:^0.27.1"
     react: "npm:^19.2.1"
     react-dom: "npm:^19.2.1"
+    react-internet-meter: "npm:^1.1.1"
     react-router-dom: "npm:^7.10.1"
   languageName: unknown
   linkType: soft
@@ -302,6 +303,15 @@ __metadata:
   peerDependencies:
     react: ^19.2.1
   checksum: 10c0/e56b6b3d72314df580ca800b70a69a21c6372703c8f45d9b5451ca6519faefb2496d76ffa9c5adb94136d2bbf2fd303d0dfc208a2cd77ede3132877471af9470
+  languageName: node
+  linkType: hard
+
+"react-internet-meter@npm:^1.1.1":
+  version: 1.1.1
+  resolution: "react-internet-meter@npm:1.1.1"
+  peerDependencies:
+    react: ">=16.0.0"
+  checksum: 10c0/073790e70dfabdcf9e2b12841e4f32ec381a5a30d23290c98481fce1af30c981b5ab1adbc0cb5a352c8af44115b22ac58fb8201b67a5f21c4ce9d5e177f16804
   languageName: node
   linkType: hard
 

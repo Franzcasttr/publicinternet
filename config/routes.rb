@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
   get "api/places" => "api/places#index"
+  post "/api/internet_speed", to: "api/internet_speed#create"
   # Defines the root path route ("/")
   get "*path", to: "react#home"
   root "react#home"
